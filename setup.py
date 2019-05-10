@@ -6,7 +6,7 @@ lc = open('LICENSE').read()
 rm = open('README.MD').read()
 
 setup(
-    name="pangolin.city",
+    name="chamelon",
     version="1.0",
     author="Vctcn93",
     author_email="vincentvane@yeah.net",
