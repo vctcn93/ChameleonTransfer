@@ -6,7 +6,7 @@ chameleon 变色龙是一个用于GIS转换的包。
 
 目前该包还处于测试阶段，未来将加入 Numpy 及 Pandas 系统的运算。待功能完成之际，该包将上线 PyPI，以供各位建筑师、BIMER、GISER 使用。
 
-该包基于麻省理工开源协议(MIT License)。
+该包基于 MIT License
 
 
 
