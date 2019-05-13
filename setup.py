@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 packages = find_packages()
 lc = open('LICENSE').read()
-rm = open('README.MD').read()
+rm = open('README.MD', encoding='UTF-8').read()
 
 setup(
     name="chamelon",
