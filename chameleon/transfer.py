@@ -70,7 +70,7 @@ def __transform_lat(lng: float, lat: float) -> float:
 
 
 @must_be_china
-def wgs84togcj02(lnglat):
+def wgs84_to_gcj02(lnglat):
     """
     将wgs84坐标系转为火星坐标
     :param lnglat: list[float] 经纬度数组
@@ -93,17 +93,17 @@ def wgs84togcj02(lnglat):
 
 
 @must_be_china
-def wgs84tobd09(lnglat):
+def wgs84_to_bd09(lnglat):
     """
     将wgs84坐标系转为百度坐标
     :param lnglat: list[float] 经纬度数组
     :return: list[float] 经纬度数组
     """
-    return gcj02tobd09(wgs84togcj02(lnglat))
+    return gcj02_to_bd09(wgs84_to_gcj02(lnglat))
 
 
 @must_be_china
-def gcj02towgs84(lnglat):
+def gcj02_to_wgs84(lnglat):
     """
     将火星坐标系转为wgs84坐标
     :param lnglat: list[float] 经纬度数组
@@ -125,7 +125,7 @@ def gcj02towgs84(lnglat):
     return [lng * 2 - mglng, lat * 2 - mglat]
 
 
-def gcj02tobd09(lnglat):
+def gcj02_to_bd09(lnglat):
     """
     将火星坐标系转为百度坐标
     :param lnglat: list[float] 经纬度数组
@@ -140,16 +140,16 @@ def gcj02tobd09(lnglat):
 
 
 @must_be_china
-def bd09towgs84(lnglat):
+def bd09_to_wgs84(lnglat):
     """
     将百度坐标系转为wgs84坐标
     :param lnglat: list[float] 经纬度数组
     :return: list[float] 经纬度数组
     """
-    return gcj02towgs84(bd09togcj02(lnglat))
+    return gcj02_to_wgs84(bd09_to_gcj02(lnglat))
 
 
-def bd09togcj02(lnglat):
+def bd09_to_gcj02(lnglat):
     """
     将百度坐标系转为火星坐标
     :param lnglat: list[float] 经纬度数组
@@ -165,7 +165,7 @@ def bd09togcj02(lnglat):
     return [gcj_lng, gcj_lat]
 
 
-def lnglattomercator(lnglat, reference_position=(0, 0), convert_rate=(1, 1)):
+def lnglat_to_mercator(lnglat, reference_position=(0, 0), convert_rate=(1, 1)):
     """
     将经纬度坐标二维展开为平面坐标
     :param lnglat: list[float] 经纬度数组
@@ -183,7 +183,7 @@ def lnglattomercator(lnglat, reference_position=(0, 0), convert_rate=(1, 1)):
     return [x * convert_rate[0], y * convert_rate[1]]
 
 
-def strlocationtofloatlocation(location: str) -> list:
+def str_location_to_float_location(location: str) -> list:
     """
     将字符格式的经纬坐标转为数字列表格式的经纬坐标，用以计算
     :param location: str 如'123.456, 123.456'
@@ -195,7 +195,7 @@ def strlocationtofloatlocation(location: str) -> list:
     return [num for num in map(float, str_locations)]
 
 
-def floatlocationtostrlocation(location: list) -> str:
+def float_location_to_str_location(location: list) -> str:
     """
     将数字列表格式的经纬坐标转为字符格式的经纬坐标，用以请求
     :param location: list 如[123.456, 123.456]
@@ -204,3 +204,14 @@ def floatlocationtostrlocation(location: list) -> str:
     # 预设location为[123.456, 123.456]
     # 输出 '123.456, 123.456'
     return ','.join(list(map(str, location)))
+
+
+def str_lnglat_reverse(location: str) -> str:
+    """
+    将坐标的经纬值位置对调
+    :param location: str '123.456, 456.123'
+    :return: 对调完成的坐标值 '456.123,123.456'
+    """
+    list_location = str_location_to_float_location(location)
+    list_location.reverse()
+    return float_location_to_str_location(list_location)

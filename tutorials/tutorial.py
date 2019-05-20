@@ -21,56 +21,45 @@ import chameleon as cml
 # 假定广州市天河体育中心在 wgs84(EPSG:4326）中的经纬坐标值为 [113.3194, 23.1403]
 wgs84_sport_center = [113.3194, 23.1403]
 
+
 # 使用模块中的 wgs84togcj02 方法，将 wgs84 坐标系下的坐标转换为 gcj02 坐标系下的坐标：
-gcj02_sport_center = cml.wgs84togcj02(
-    wgs84_sport_center[0],  # 提取出体育中心坐标的经度
-    wgs84_sport_center[1]  # 提取出体育中心坐标的纬度
-)
+gcj02_sport_center = cml.wgs84_to_gcj02(wgs84_sport_center)
 print(f'国测局坐标系坐标为:{gcj02_sport_center}')  # 打印出换算后的经纬度坐标
 # OUTPUT： 国测局坐标系坐标为:[113.32481304825205, 23.13770219137702]
+
 
 # 2. 类似于从：
 # gcj02 转 wgs84、wgs84 转 bd09、bd09 转 gcj02、gcj02 转 bd09、bd09 转 wgs84，
 # 均可使用模块中对应的方法
 gcj02_sport_center = [113.32481304825205, 23.13770219137702]
 
+
 # gcj02 转 wgs84
-wgs84_sport_center = cml.wgs84togcj02(
-    gcj02_sport_center[0],  # 提取出体育中心坐标的经度
-    gcj02_sport_center[1]  # 提取出体育中心坐标的纬度
-)
+wgs84_sport_center = cml.wgs84_to_gcj02(gcj02_sport_center)
 print(f'地心坐标系坐标为:{wgs84_sport_center}')  # 打印出换算后的经纬度坐标
 # OUTPUT: 地心坐标系坐标为:[113.33023701919959, 23.135113604425456]
 
+
 # wgs84 转 bd09
-bd09_sport_center = cml.wgs84tobd09(
-    wgs84_sport_center[0],
-    wgs84_sport_center[1]
-)
+bd09_sport_center = cml.wgs84_to_bd09(wgs84_sport_center)
 print(f'百度坐标系坐标为:{bd09_sport_center}')  # 打印出换算后的经纬度坐标
 # OUTPUT: 百度坐标系坐标为:[113.3422201772925, 23.138199057854955]
 
+
 # bd09 转 gcj02
-gcj02_sport_center = cml.bd09togcj02(
-    bd09_sport_center[0],
-    bd09_sport_center[1]
-)
+gcj02_sport_center = cml.bd09_to_gcj02(bd09_sport_center)
 print(f'国测局坐标系坐标为:{gcj02_sport_center}')  # 打印出换算后的经纬度坐标
 # OUTPUT: 国测局坐标系坐标为:[113.33567198159767, 23.132534536732628]
 
+
 # gcj02 转 bd09
-bd09_sport_center = cml.gcj02tobd09(
-    gcj02_sport_center[0],
-    gcj02_sport_center[1]
-)
+bd09_sport_center = cml.gcj02_to_bd09(gcj02_sport_center)
 print(f'百度坐标系坐标为:{bd09_sport_center}')  # 打印出换算后的经纬度坐标
 # OUTPUT: 百度坐标系坐标为:[113.3422201807085, 23.13819925826263]
 
+
 # bd09 转 wgs84
-wgs84_sport_center = cml.bd09towgs84(
-    bd09_sport_center[0],
-    bd09_sport_center[1]
-)
+wgs84_sport_center = cml.bd09_to_wgs84(bd09_sport_center)
 print(f'地心坐标系坐标为:{wgs84_sport_center}')  # 打印出换算后的经纬度坐标
 # OUTPUT: 地心坐标系坐标为:[113.33022610850503, 23.13510471422404]
 
@@ -85,23 +74,20 @@ print(f'地心坐标系坐标为:{wgs84_sport_center}')  # 打印出换算后的
 # 由纯数字列表形式，转换为字符形式：cml.floatlocationtostrlocation()。
 
 str_wgs84_sport_center = '113.3194, 23.1403'  # 获取到的数据为字符形式的经纬度坐标
-list_wgs84_sport_center = cml.strlocationtofloatlocation(  # 使用字符转换为纯数字列表的方法
+list_wgs84_sport_center = cml.str_location_to_float_location(  # 使用字符转换为纯数字列表的方法
     str_wgs84_sport_center
 )
 print(f'转换之后的数据为:{list_wgs84_sport_center}')  # 打印出换算后的数据
 # OUTPUT: 转换之后的数据为:[113.3194, 23.1403]
 
+
 # 此时，我们便可使用转换为数字列表的经纬坐标数据，去进行相关的坐标转换。
-list_gcj02_sport_center = cml.wgs84togcj02(
-    list_wgs84_sport_center[0],
-    list_wgs84_sport_center[1]
-)
+list_gcj02_sport_center = cml.wgs84_to_gcj02(list_wgs84_sport_center)
 print(f'转换之后的经纬度为:{list_gcj02_sport_center}')  # 打印出换算后的数据
 # OUTPUT: 转换之后的经纬度为:[113.32481304825205, 23.13770219137702]
 
+
 # 同样，在部分情况下，我们出于对数据传输的要求，需要把纯数字列表的数据，转换为字符的形式:
-str_gcj02_sport_center = cml.floatlocationtostrlocation(
-    list_gcj02_sport_center
-)
+str_gcj02_sport_center = cml.float_location_to_str_location(list_gcj02_sport_center)
 print(f'转换之后的数据为:{str_gcj02_sport_center}')  # 打印出换算后的数据
 # OUTPUT: 转换之后的数据为: 113.32481304825205,23.13770219137702

@@ -39,20 +39,20 @@ def normal_wgs84togcj02_500k():
     wgs84 = [113.3194, 23.1403]
 
     for i in range(500000):
-        cml.wgs84togcj02(wgs84)
+        cml.wgs84_to_gcj02(wgs84)
 
 
 def normal_strlocationtofloatlocation_500k():
     location = '113.3194, 23.1403'
 
     for i in range(500000):
-        cml.strlocationtofloatlocation(location)
+        cml.str_location_to_float_location(location)
 
 
 def normal_floatlocationtostrlocation_500k():
     location = [113.3194, 23.1403]
     for i in range(500000):
-        cml.floatlocationtostrlocation(location)
+        cml.float_location_to_str_location(location)
 
 
 if __name__ == '__main__':
